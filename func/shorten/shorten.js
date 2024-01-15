@@ -26,9 +26,9 @@ exports.handler = async function (event, context) {
       const shortUrl = generateShortUrl();
 
       // Save the mapping in the Supabase table
-      //!const { data: shortenedUrlData, error } = await supabase
-      //!  .from("urls")
-      //!  .insert([{ long_url: longUrl, short_url: shortUrl }]);
+      const { data: shortenedUrlData, error } = await supabase
+        .from("urls")
+        .insert([{ long_url: longUrl, short_url: shortUrl }]);
 
       if (error) {
         throw error;

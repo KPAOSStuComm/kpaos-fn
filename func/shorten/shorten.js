@@ -10,6 +10,26 @@ exports.handler = async function (event, context) {
       const data = JSON.parse(event.body);
       const { longUrl } = data;
 
+      // Extract the user token from the cookie
+      const userToken = event.headers.cookie
+        ?.split("; ")
+        .find((cookie) => cookie.startsWith("userToken="))
+        ?.split("=")[1];
+
+      // Verify userToken and get user information
+      const { data: userData, error: userError } = await supabase
+        .from("users")
+        .select("username")
+        .eq("token", userToken)
+        .single();
+
+      if (userError || !userData) {
+        return {
+          statusCode: 401,
+          body: JSON.stringify({ error: "Unauthorized" }),
+        };
+      }
+
       // Generate a unique short code
       function generateShortUrl() {
         const characters =
@@ -28,7 +48,13 @@ exports.handler = async function (event, context) {
       // Save the mapping in the Supabase table
       const { data: shortenedUrlData, error } = await supabase
         .from("urls")
-        .insert([{ long_url: longUrl, short_url: shortUrl }]);
+        .insert([
+          {
+            long_url: longUrl,
+            short_url: shortUrl,
+            username: userData.username, // Store the username in the URLs table
+          },
+        ]);
 
       if (error) {
         throw error;

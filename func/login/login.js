@@ -35,8 +35,12 @@ exports.handler = async function (event, context) {
         };
       }
 
-      // Set the token in a cookie
-      const cookieHeaderValue = `userToken=${userData.token}; Path=/; HttpOnly; Secure; SameSite=Strict`;
+      // Calculate the expiration date (14 days from now)
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 14);
+
+      // Set the token in a cookie with an expiration date
+      const cookieHeaderValue = `userToken=${userData.token}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${expirationDate.toUTCString()}`;
 
       // Return the user's token in the response
       return {

@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Mali:wght@200;300;400;500;600&family=Noto+Sans+Thai:wght@400;500;600;700&family=Sarabun:wght@100;200;300;400&display=swap");
+
+body {
+  font-family: "Sarabun", sans-serif;
+  color: #24292f;
+}
+
+h1 {
+  font-family: "Noto Sans Thai", sans-serif;
+  font-weight: 600;
+}
+
+h2 {
+  font-family: "Mali", sans-serif;
+  font-weight: 500;
+}
+
+input {
+  font-family: "Mali", cursive;
+  font-weight: 500;
+  border: 0.5px solid rgb(50, 50, 50);
+  border-radius: 1em;
+}
+
+button {
+  display: block;
+  margin-left: auto;
+  background-color: #a2c457;
+  color: #24292f;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition-duration: 500ms;
+  font-family: "Mali", cursive;
+  font-weight: 500;
+}
+
+button:hover {
+  color: #f7f8fa;
+  background-color: #140e76;
+}
+
+a {
+  color: #24292f;
+}
+
+#profileImg {
+  display: block;
+  margin: 0 auto;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+}
+
+#inv {
+  color: #24292f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#qrInv {
+  display: block;
+  margin: 0 auto;
+}

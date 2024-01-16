@@ -1,5 +1,5 @@
 document
-  .getElementById("loginForm")
+  .getElementById("login-form")
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 

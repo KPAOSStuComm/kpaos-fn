@@ -1,5 +1,5 @@
+// ./func/login/login.js
 const { createClient } = require("@supabase/supabase-js");
-const bcrypt = require("bcrypt");
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
@@ -11,7 +11,7 @@ exports.handler = async function (event, context) {
       const data = JSON.parse(event.body);
       const { username, password } = data;
 
-      // Retrieve user data including hashed password from Supabase
+      // Retrieve user data including plain text password from Supabase
       const { data: userData, error: userError } = await supabase
         .from("users")
         .select("id", "username", "password", "token")
@@ -25,10 +25,8 @@ exports.handler = async function (event, context) {
         };
       }
 
-      // Compare the provided password with the stored hashed password
-      const isPasswordValid = await bcrypt.compare(password, userData.password);
-
-      if (!isPasswordValid) {
+      // Compare the provided password with the stored plain text password
+      if (password !== userData.password) {
         return {
           statusCode: 401,
           body: JSON.stringify({ error: "Invalid username or password" }),
@@ -40,7 +38,9 @@ exports.handler = async function (event, context) {
       expirationDate.setDate(expirationDate.getDate() + 14);
 
       // Set the token in a cookie with an expiration date
-      const cookieHeaderValue = `userToken=${userData.token}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${expirationDate.toUTCString()}`;
+      const cookieHeaderValue = `userToken=${
+        userData.token
+      }; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${expirationDate.toUTCString()}`;
 
       // Return the user's token in the response
       return {
@@ -51,9 +51,10 @@ exports.handler = async function (event, context) {
         body: JSON.stringify({ token: userData.token }),
       };
     } catch (error) {
+      console.error("Error:", error.message);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: "Internal Server Error: " + error }),
+        body: JSON.stringify({ error: "Internal Server Error" }),
       };
     }
   } else {

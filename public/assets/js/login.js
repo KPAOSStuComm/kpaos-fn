@@ -23,9 +23,6 @@ document
         if (response.status === 500) {
           // Handle 500 Internal Server Error (other server error)
           alert("Login failed: Internal server error");
-        } else {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Login failed");
         }
       }
 

@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KPAOSStuComm/kpaos-short-url.git"
+    "url": "git+https://github.com/KPAOSStuComm/kpaos-url-shortener.git"
   },
   "author": "KPAOS Students' Community",
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/KPAOSStuComm/kpaos-short-url/issues"
+    "url": "https://github.com/KPAOSStuComm/kpaos-url-shortener/issues"
   },
-  "homepage": "https://github.com/KPAOSStuComm/kpaos-short-url#readme",
+  "homepage": "https://github.com/KPAOSStuComm/kpaos-url-shortener#readme",
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3"
   }

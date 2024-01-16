@@ -42,9 +42,18 @@
     <!-- * Features -->
     <h2 class="featName">วันนี้คุณจะย่อลิงก์ใด?</h2>
 
-    <label for="linkInput">ลิงก์</label>
-    <input type="url" name="linkInput" id="linkInput" />
-    <button type="submit">ย่อลิงก์</button>
+    <form id="urlInput" autocomplete="off">
+      <label for="linkInput">ลิงก์</label>
+      <div class="inputCenter">
+        <input type="url" name="linkInput" id="linkInput" />
+        <button type="submit">ย่อลิงก์</button>
+      </div>
+    </form>
+
+    <p id="result">ลิงก์ที่ย่อแล้ว: <a href="" id="shortenedLink"></a></p>
+    <div id="inputCenter">
+      <button onclick="copyToClipboard()">คัดลอก</button>
+    </div>
 
     <!-- * Footer -->
     <footer>
@@ -106,7 +115,7 @@
       </div>
     </footer>
 
-    <p>
+    <p class="copyright">
       &copy; KPAOS Information System by KPAOS Students' Community is licensed
       under
       <a href="https://www.mozilla.org/en-US/MPL/2.0/"

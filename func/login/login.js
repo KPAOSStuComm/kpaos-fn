@@ -18,9 +18,6 @@ exports.handler = async function (event, context) {
         .eq("username", username)
         .single();
 
-      console.log("Received credentials:", { username, password });
-      console.log("Stored user data:", userData.username);
-
       if (userError || !userData) {
         return {
           statusCode: 401,

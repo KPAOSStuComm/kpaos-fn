@@ -15,6 +15,10 @@ document
         body: JSON.stringify({ username, password }),
       });
 
+      if (response.ok) {
+        location.href = "./dashboard";
+      }
+
       if (!response.ok) {
         if (response.status === 401) {
           // Handle 401 Unauthorized (authentication failure)
@@ -25,8 +29,6 @@ document
           alert("Login failed: Internal server error");
         }
       }
-
-      location.href = "./dashboard";
     } catch (error) {
       console.error("Login error:", error.message);
       alert("Login failed: " + error.message);

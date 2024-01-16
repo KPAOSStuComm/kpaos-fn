@@ -14,9 +14,12 @@ exports.handler = async function (event, context) {
       // Retrieve user data including plain text password from Supabase
       const { data: userData, error: userError } = await supabase
         .from("users")
-        .select("id", "username", "password", "token")
+        .select("username, password, token")
         .eq("username", username)
         .single();
+
+      console.log("Received credentials:", { username, password });
+      console.log("Stored user data:", userData.username);
 
       if (userError || !userData) {
         return {

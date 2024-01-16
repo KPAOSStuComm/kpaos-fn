@@ -30,7 +30,7 @@ document
         }
       }
     } catch (error) {
-      console.error("Login error:", error.message);
+      console.error("Login error: ", error.message);
       alert("Login failed: " + error.message);
     }
   });

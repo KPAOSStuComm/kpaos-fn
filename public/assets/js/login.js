@@ -7,54 +7,66 @@ document
     const password = document.getElementById("password").value;
 
     try {
-      const response = await fetch("/.netlify/functions/login", {
+      const loginResponse = await fetch("/.netlify/functions/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username: username, password: password }),
+        body: JSON.stringify({ username, password }),
       });
 
-      if (response.ok) {
+      if (loginResponse.ok) {
+        // Successful login, redirect to dashboard
         location.href = "./dashboard";
-      }
-
-      if (!response.ok) {
-        if (response.status === 401) {
+      } else {
+        // Handle non-OK responses
+        if (loginResponse.status === 401) {
           // Handle 401 Unauthorized (authentication failure)
           alert("Authentication failed: Invalid username or password");
-        }
-        if (response.status === 500) {
+        } else if (loginResponse.status === 500) {
           // Handle 500 Internal Server Error (other server error)
           alert("Login failed: Internal server error");
+        } else {
+          // Handle other errors
+          console.error(
+            "Login Error:",
+            loginResponse.status,
+            loginResponse.statusText
+          );
         }
       }
     } catch (error) {
-      console.error("Login error: ", error.message);
+      // Handle network or other errors
+      console.error("Login Network Error:", error.message);
       alert("Login failed: " + error.message);
     }
   });
 
+// Check if the user is already authenticated
 try {
-  const response = await fetch("/.netlify/functions/users", {
+  const userResponse = await fetch("/.netlify/functions/users", {
     method: "GET",
   });
 
-  if (response.ok) {
-    // Successful response
+  if (userResponse.ok) {
+    // Successful response, user is authenticated, redirect to dashboard
     location.href = "./dashboard";
   } else {
     // Handle non-OK responses
-    if (response.status === 401) {
-      // Handle 401 Unauthorized (authentication failure)
+    if (userResponse.status === 401) {
+      // Handle 401 Unauthorized (user not authenticated)
+      // You can optionally handle this case or just let the user stay on the login page
     } else {
       // Handle other errors
-      console.error("Error:", response.status, response.statusText);
-      // Optionally display an error message to the user
+      console.error(
+        "User Error:",
+        userResponse.status,
+        userResponse.statusText
+      );
     }
   }
 } catch (error) {
   // Handle network or other errors
-  console.error("Network Error:", error.message);
+  console.error("User Network Error:", error.message);
   // Optionally display an error message to the user
 }

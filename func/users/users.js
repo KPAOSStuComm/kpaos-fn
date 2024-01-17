@@ -29,7 +29,11 @@ exports.handler = async function (event, context) {
 
       return {
         statusCode: 200,
-        body: JSON.stringify({ username: userData.username }),
+        body: JSON.stringify({
+          username: userData.username,
+          name: userData.name,
+          profilePic: userData.profile_pic,
+        }),
       };
     } catch (error) {
       return {

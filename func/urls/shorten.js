@@ -31,16 +31,31 @@ exports.handler = async function (event, context) {
       }
 
       // Generate a unique short code
-      function generateShortUrl() {
+      async function generateShortUrl() {
         const characters =
           "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        let shortCode = "";
-        for (let i = 0; i < 8; i++) {
-          shortCode += characters.charAt(
-            Math.floor(Math.random() * characters.length)
-          );
+        const codeLength = 8;
+
+        while (true) {
+          let shortCode = "";
+          for (let i = 0; i < codeLength; i++) {
+            shortCode += characters.charAt(
+              Math.floor(Math.random() * characters.length)
+            );
+          }
+
+          // Check if the generated code already exists in the database
+          const { data: existingUrls, error } = await supabase
+            .from("urls")
+            .select("short_url")
+            .eq("short_url", shortCode);
+
+          if (error || !existingUrls.length) {
+            // The generated code is unique, return it
+            return shortCode;
+          }
+          // If the code already exists, loop and generate a new one
         }
-        return shortCode;
       }
 
       const shortUrl = generateShortUrl();

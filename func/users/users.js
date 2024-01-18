@@ -30,9 +30,9 @@ exports.handler = async function (event, context) {
       return {
         statusCode: 200,
         body: JSON.stringify({
-          username: userData.username,
-          name: userData.name,
-          profilePic: userData.profile_pic,
+          username: userData.username || null,
+          name: userData.name || null,
+          profilePic: userData.profile_pic || null,
         }),
       };
     } catch (error) {

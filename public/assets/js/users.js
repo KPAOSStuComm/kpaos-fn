@@ -14,7 +14,7 @@ async function fetchUserData() {
 
     if (response.ok) {
       // Logged in
-      document.getElementById("name").innerText = response.name;
+      document.getElementById("name").innerHTML = response.name;
       document.getElementById("profileImg").src = response.profilePic;
     } else {
       if (userResponse.status === 401) {

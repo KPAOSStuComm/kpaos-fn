@@ -16,7 +16,7 @@ exports.handler = async function (event, context) {
       // Verify userToken and get user information
       const { data: userData, error: userError } = await supabase
         .from("users")
-        .select("username")
+        .select("username, name, profile_pic")
         .eq("token", userToken)
         .single();
 

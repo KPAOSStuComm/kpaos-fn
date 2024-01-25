@@ -8,21 +8,24 @@ function getCookie(name) {
 // Function to get user information
 async function fetchUserData() {
   try {
-    const response = await fetch("/.netlify/functions/users", {
+    const response = await fetch("../.netlify/functions/users", {
       method: "GET",
     });
 
     if (response.ok) {
-      // Logged in
-      document.getElementById("name").innerHTML = response.name;
-      document.getElementById("profileImg").src = response.profilePic;
+      // Parse the JSON response
+      const userData = await response.json();
+
+      // Update HTML elements with user information
+      document.getElementById("name").innerHTML = userData.name;
+      document.getElementById("profileImg").src = userData.profilePic;
     } else {
-      if (userResponse.status === 401) {
+      if (response.status === 401) {
         // Handle 401 Unauthorized (user not authenticated)
         location.href = "./";
       } else {
         // Handle other errors
-        console.error("Error:", userResponse.status, userResponse.statusText);
+        console.error("Error:", response.status, response.statusText);
       }
     }
   } catch (error) {

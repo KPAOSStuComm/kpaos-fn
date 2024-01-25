@@ -6,7 +6,7 @@ document
     const url = document.getElementById("linkInput").value;
 
     try {
-      const response = await fetch("/.netlify/functions/urls", {
+      const response = await fetch("../.netlify/functions/urls", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

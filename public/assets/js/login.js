@@ -7,7 +7,7 @@ document
     const password = document.getElementById("password").value;
 
     try {
-      const loginResponse = await fetch("/.netlify/functions/login", {
+      const loginResponse = await fetch("../.netlify/functions/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

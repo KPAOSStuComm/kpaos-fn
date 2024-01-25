@@ -15,9 +15,13 @@ document
       });
 
       if (response.ok) {
+        // Parse the JSON response
+        const responseData = await response.json();
+
         document.getElementById("linkInput").value = "";
-        document.getElementById("shortenedLink").innerHTML = response.shortUrl;
-        document.getElementById("shortenedLink").href = response.shortUrl;
+        document.getElementById("shortenedLink").innerHTML =
+          responseData.shortUrl;
+        document.getElementById("shortenedLink").href = responseData.shortUrl;
       }
 
       if (!response.ok) {
@@ -37,13 +41,35 @@ document
   });
 
 function copyToClipboard() {
-  // Get the text field
-  var copyText = document.getElementById("linkInput");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    // Use the Clipboard API if available
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        alert(`Copied to clipboard!`);
+      })
+      .catch((error) => {
+        alert("Error copying to clipboard: " + error.message);
+        copyToClipboardFallback(text); // Use fallback if Clipboard API fails
+      });
+  } else {
+    // Get the text field
+    var copyText = document.getElementById("shortenedLink");
 
-  // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
+    // Create a range to select the text
+    var range = document.createRange();
+    range.selectNode(copyText);
 
-  // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
+    // Clear any existing selection and select the text
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    // Copy the selected text to the clipboard
+    document.execCommand("copy");
+
+    // Clear the selection
+    window.getSelection().removeAllRanges();
+
+    alert("Copied");
+  }
 }

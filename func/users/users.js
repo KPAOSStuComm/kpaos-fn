@@ -8,9 +8,10 @@ exports.handler = async function (event, context) {
   if (event.httpMethod === "GET") {
     try {
       // Extract the user token from the cookie
-      const userToken = `userToken=${
-        userData.token
-      }; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${expirationDate.toUTCString()}`;
+      const userToken = event.headers.cookie
+        ?.split("; ")
+        .find((cookie) => cookie.startsWith("userToken="))
+        ?.split("=")[1];
 
       // Verify userToken and get user information
       const { data: userData, error: userError } = await supabase

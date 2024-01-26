@@ -1,3 +1,4 @@
+// ./func/login/login.js
 const { createClient } = require("@supabase/supabase-js");
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -8,81 +9,52 @@ exports.handler = async function (event, context) {
   if (event.httpMethod === "POST") {
     try {
       const data = JSON.parse(event.body);
-      const { longUrl } = data;
+      const { username, password } = data;
 
-      // Extract the user token from the cookie
-      const userToken = event.headers.cookie
-        ?.split("; ")
-        .find((cookie) => cookie.startsWith("userToken="))
-        ?.split("=")[1];
-
-      // Verify userToken and get user information
+      // Retrieve user data including plain text password from Supabase
       const { data: userData, error: userError } = await supabase
         .from("users")
-        .select("username")
-        .eq("token", userToken)
+        .select("username, password, token")
+        .eq("username", username)
         .single();
 
       if (userError || !userData) {
         return {
           statusCode: 401,
-          body: JSON.stringify({ error: "Unauthorized" }),
+          body: JSON.stringify({ error: "Invalid username or password" }),
         };
       }
 
-      // Generate a unique short code
-      async function generateShortUrl() {
-        const characters =
-          "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        const codeLength = 8;
-
-        while (true) {
-          let shortCode = "";
-          for (let i = 0; i < codeLength; i++) {
-            shortCode += characters.charAt(
-              Math.floor(Math.random() * characters.length)
-            );
-          }
-
-          // Check if the generated code already exists in the database
-          const { data: existingUrls, error } = await supabase
-            .from("urls")
-            .select("short_url")
-            .eq("short_url", shortCode);
-
-          if (error || !existingUrls.length) {
-            // The generated code is unique, return it
-            return shortCode;
-          }
-          // If the code already exists, loop and generate a new one
-        }
+      // Compare the provided password with the stored plain text password
+      if (password !== userData.password) {
+        return {
+          statusCode: 401,
+          body: JSON.stringify({ error: "Invalid username or password" }),
+        };
       }
 
-      const shortUrl = generateShortUrl();
+      // Calculate the expiration date (14 days from now)
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + 14);
 
-      // Save the mapping in the Supabase table
-      const { data: shortenedUrlData, error } = await supabase
-        .from("urls")
-        .insert([
-          {
-            long_url: longUrl,
-            short_url: shortUrl,
-            username: userData.username, // Store the username in the URLs table
-          },
-        ]);
+      // Set the token in a cookie with an expiration date
+      const cookieHeaderValue = `userToken=${
+        userData.token
+      }; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${expirationDate.toUTCString()}`;
 
-      if (error) {
-        throw error;
-      }
-
+      // Return the user's token in the response
       return {
-        statusCode: 201,
-        body: JSON.stringify({ shortUrl }),
+        statusCode: 200,
+        headers: {
+          "Set-Cookie": cookieHeaderValue,
+        },
+        body: JSON.stringify({ token: userData.token }),
       };
     } catch (error) {
+      console.error("Error:", error.message);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: "Internal Server Error: " + error }),
+        body: JSON.stringify({ error: "Internal Server Error" }),
       };
     }
   } else if (event.httpMethod === "GET") {

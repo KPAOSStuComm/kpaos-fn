@@ -31,45 +31,11 @@ document
         }
         if (response.status === 500) {
           // Handle 500 Internal Server Error (other server error)
-          alert("Login failed: Internal server error");
+          alert("Internal server error");
         }
       }
     } catch (error) {
-      console.error("Login error: ", error.message);
-      alert("Login failed: " + error.message);
+      console.error("Network error: ", error.message);
+      alert("Network error: " + error.message);
     }
   });
-
-function copyToClipboard() {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    // Use the Clipboard API if available
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        alert(`Copied to clipboard!`);
-      })
-      .catch((error) => {
-        alert("Error copying to clipboard: " + error.message);
-        copyToClipboardFallback(text); // Use fallback if Clipboard API fails
-      });
-  } else {
-    // Get the text field
-    var copyText = document.getElementById("shortenedLink");
-
-    // Create a range to select the text
-    var range = document.createRange();
-    range.selectNode(copyText);
-
-    // Clear any existing selection and select the text
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-
-    // Copy the selected text to the clipboard
-    document.execCommand("copy");
-
-    // Clear the selection
-    window.getSelection().removeAllRanges();
-
-    alert("Copied");
-  }
-}

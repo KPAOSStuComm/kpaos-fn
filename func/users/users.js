@@ -45,7 +45,7 @@ exports.handler = async function (event, context) {
     try {
       // Clear the user token cookie on the server side
       const clearCookieHeader =
-        "Set-Cookie: userToken=; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        "userToken=; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
       return {
         statusCode: 200,

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | ระบบย่อลิงก์ รร.อบจ.กระบี่</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/dashboard.css" />
+    <link rel="stylesheet" href="./assets/css/icons.css" />
+    <link rel="shortcut icon" href="./assets/kpaos.jpg" type="image/x-icon" />
+    <meta
+      name="description"
+      content="ระบบย่อลิงก์ โรงเรียนองค์การบริหารส่วนจังหวัดกระบี่"
+    />
+    <meta name="format-detection" content="telephone=no" />
+  </head>
+  <body>
+    <!-- * Header -->
+    <header>
+      <h1>ระบบย่อลิงก์ รร.อบจ.กระบี่</h1>
+      <button class="icon" onclick="logout()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M3 3.25c0-.966.784-1.75 1.75-1.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.25.25 0 0 0-.25.25v17.5c0 .138.112.25.25.25h5.5a.75.75 0 0 1 0 1.5h-5.5A1.75 1.75 0 0 1 3 20.75Zm16.006 9.5H10.75a.75.75 0 0 1 0-1.5h8.256l-3.3-3.484a.75.75 0 0 1 1.088-1.032l4.5 4.75a.75.75 0 0 1 0 1.032l-4.5 4.75a.75.75 0 0 1-1.088-1.032Z"
+          ></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- * Greetings -->
+    <img src="" alt="Profile Picture" id="profileImg" />
+    <h2>
+      สวัสดี
+      <span id="name"></span>
+    </h2>
+
+    <!-- * Features -->
+    <h2 class="featName">วันนี้คุณจะย่อลิงก์ใด?</h2>
+
+    <form id="urlInput" autocomplete="off">
+      <label for="linkInput">ลิงก์</label>
+      <div class="inputCenter">
+        <input
+          type="url"
+          name="linkInput"
+          id="linkInput"
+          placeholder="ลิงก์"
+          required
+        />
+        <button type="submit">ย่อลิงก์</button>
+      </div>
+    </form>
+
+    <p id="result">ลิงก์ที่ย่อแล้ว: <a href="" id="shortenedLink"></a></p>
+    <!-- <div id="inputCenter">
+      <button onclick="copyToClipboard()">คัดลอก</button>
+    </div> -->
+
+    <!-- * Footer -->
+    <footer>
+      <div class="guide">
+        <a
+          href="https://github.com/KPAOSStuComm/kpaos-url-shortener/wiki"
+          class="ft"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path
+              d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.495 4.495 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.752.752 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a2.996 2.996 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.503 4.503 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"
+            ></path>
+          </svg>
+          <p class="ft">คู่มือ</p>
+        </a>
+      </div>
+
+      <div class="github">
+        <a
+          href="https://github.com/KPAOSStuComm/kpaos-url-shortener"
+          class="ft"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+          >
+            <path
+              d="M12.5 0.75C6.14625 0.75 1 5.89625 1 12.25C1 17.3387 4.29187 21.6369 8.86312 23.1606C9.43812 23.2612 9.65375 22.9162 9.65375 22.6144C9.65375 22.3412 9.63938 21.4356 9.63938 20.4725C6.75 21.0044 6.0025 19.7681 5.7725 19.1212C5.64313 18.7906 5.0825 17.77 4.59375 17.4969C4.19125 17.2812 3.61625 16.7494 4.57938 16.735C5.485 16.7206 6.13188 17.5687 6.3475 17.9137C7.3825 19.6531 9.03563 19.1644 9.69688 18.8625C9.7975 18.115 10.0994 17.6119 10.43 17.3244C7.87125 17.0369 5.1975 16.045 5.1975 11.6462C5.1975 10.3956 5.64312 9.36062 6.37625 8.55562C6.26125 8.26812 5.85875 7.08937 6.49125 5.50812C6.49125 5.50812 7.45438 5.20625 9.65375 6.68687C10.5738 6.42812 11.5513 6.29875 12.5288 6.29875C13.5063 6.29875 14.4838 6.42812 15.4038 6.68687C17.6031 5.19187 18.5662 5.50812 18.5662 5.50812C19.1987 7.08937 18.7962 8.26812 18.6812 8.55562C19.4144 9.36062 19.86 10.3812 19.86 11.6462C19.86 16.0594 17.1719 17.0369 14.6131 17.3244C15.03 17.6837 15.3894 18.3737 15.3894 19.4519C15.3894 20.99 15.375 22.2262 15.375 22.6144C15.375 22.9162 15.5906 23.2756 16.1656 23.1606C20.7081 21.6369 24 17.3244 24 12.25C24 5.89625 18.8538 0.75 12.5 0.75Z"
+            />
+          </svg>
+          <p class="ft">GitHub Repository</p>
+        </a>
+      </div>
+
+      <div class="email">
+        <a
+          href="mailto:kpaosstucomm@gmail.com?subject=%5BKPAOS%20URL%20Shortener%5D"
+          class="ft"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+          >
+            <path
+              d="M1.75 3h20.5c.966 0 1.75.784 1.75 1.75v14a1.75 1.75 0 0 1-1.75 1.75H1.75A1.75 1.75 0 0 1 0 18.75v-14C0 3.784.784 3 1.75 3ZM1.5 7.412V18.75c0 .138.112.25.25.25h20.5a.25.25 0 0 0 .25-.25V7.412l-9.52 6.433c-.592.4-1.368.4-1.96 0Zm0-2.662v.852l10.36 7a.25.25 0 0 0 .28 0l10.36-7V4.75a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25Z"
+            />
+          </svg>
+          <p class="ft">อีเมล</p>
+        </a>
+      </div>
+    </footer>
+
+    <p class="copyright">
+      &copy; KPAOS Information System by KPAOS Students' Community is licensed
+      under
+      <a href="https://www.mozilla.org/en-US/MPL/2.0/"
+        >Mozilla Public License Version 2.0</a
+      >
+    </p>
+
+    <!-- * Import Script -->
+    <script src="./assets/js/shortener.js"></script>
+    <script src="./assets/js/users.js"></script>
+    <script src="./assets/js/self-xss_warn.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+footer {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+}
+
+.github,
+.email,
+.guide {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.github a.ft,
+.email a.ft,
+.guide a.ft {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.github svg,
+.email svg,
+.guide svg {
+  margin-right: 10px; /* Adjust as needed */
+}
+
+footer p.ft {
+  font-family: "Mali", cursive;
+  font-size: 16px;
+  color: #24292f;
+  transition-duration: 500ms;
+}
+
+footer p.ft:hover {
+  color: #0969da;
+}
+
+svg {
+  color: #24292f;
+  transition-duration: 500ms;
+}
+
+svg:hover {
+  fill: #0969da;
+}

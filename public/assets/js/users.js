@@ -37,11 +37,23 @@ async function fetchUserData() {
 fetchUserData();
 
 // Function to perform logout
-function logout() {
-  // Clear the user token cookie
-  document.cookie =
-    "userToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+async function logout() {
+  try {
+    const response = await fetch("../.netlify/functions/users", {
+      method: "POST",
+    });
 
-  // Redirect to the login page
-  window.location.href = "./";
+    if (response.ok) {
+      // Clear the user token cookie on the client side
+      document.cookie =
+        "userToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+      // Redirect to the login page
+      window.location.href = "./";
+    } else {
+      console.error("Logout failed:", response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error("Logout failed:", error.message);
+  }
 }

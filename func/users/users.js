@@ -41,6 +41,26 @@ exports.handler = async function (event, context) {
         body: JSON.stringify({ error: "Internal Server Error" }),
       };
     }
+  } else if (event.httpMethod === "POST") {
+    try {
+      // Clear the user token cookie on the server side
+      const clearCookieHeader =
+        "Set-Cookie: userToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+      return {
+        statusCode: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Set-Cookie": clearCookieHeader,
+        },
+        body: JSON.stringify({ message: "Logout successful" }),
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Internal Server Error" }),
+      };
+    }
   } else {
     return {
       statusCode: 405,

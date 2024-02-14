@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- #8
+- [#8 The link in the result is not shortened](https://github.com/KPAOSStuComm/kpaos-url-shortener/issues/8)
 
 ## [2.0] 02-14-2024
 
@@ -19,9 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- #5
+- [#5 The banner does not display](https://github.com/KPAOSStuComm/kpaos-url-shortener/issues/5)
 
 ## [1.0] 01-27-2024
 
 ### Added
-- #2 
+- [#2 Version 1.0](https://github.com/KPAOSStuComm/kpaos-url-shortener/pull/2)

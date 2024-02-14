@@ -82,7 +82,7 @@ exports.handler = async function (event, context) {
       return {
         statusCode: 201,
         body: JSON.stringify({
-          shortUrl: "https://kpaos-shorturl.netlify.app/fn/urls/" + shortUrl,
+          shortUrl: "https://kpaos-shorturl.netlify.app/r/" + shortUrl,
         }),
       };
     } catch (error) {

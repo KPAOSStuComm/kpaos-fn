@@ -3,7 +3,7 @@ document
   .addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    document.getElementById("shortenedLink").href = "กำลังย่อลิงก์...";
+    document.getElementById("shortenedLink").innerHTML = "กำลังย่อลิงก์...";
     const url = document.getElementById("linkInput").value;
 
     try {

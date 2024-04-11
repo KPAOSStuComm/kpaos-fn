@@ -6,8 +6,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d78542ff-bdf5-4559-82d5-55b0a17f4bda/deploy-status)](https://app.netlify.com/sites/kpaos-infosys/deploys)
 
-[![Made with Supabase](https://supabase.com/badge-made-with-supabase.svg#gh-light-mode-only)](https://supabase.com)
-[![Made with Supabase](https://supabase.com/badge-made-with-supabase-dark.svg#gh-dark-mode-only)](https://supabase.com)
+[![Made with Supabase](https://supabase.com/badge-made-with-supabase.svg#gh-light-mode-only)](https://supabase.com#gh-light-mode-only)
+[![Made with Supabase](https://supabase.com/badge-made-with-supabase-dark.svg#gh-dark-mode-only)](https://supabase.com#gh-dark-mode-only)
 
 ## 💻 Built with
 

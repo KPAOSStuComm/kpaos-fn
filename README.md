@@ -1,8 +1,8 @@
-<h1 align="center" id="title">KPAOS URL Shortener</h1>
+<h1 align="center" id="title">KPAOS Functions</h1>
 
 ## 🚀 Website
 
-[https://kpaos-shorturl.netlify.app](https://kpaos-shorturl.netlify.app/)
+[https://kpaos-shorturl.netlify.app](https://kpaos-fn.netlify.app/)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d78542ff-bdf5-4559-82d5-55b0a17f4bda/deploy-status)](https://app.netlify.com/sites/kpaos-infosys/deploys)
 

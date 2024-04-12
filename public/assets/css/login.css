@@ -53,6 +53,11 @@ input {
   margin-top: 1mm;
 }
 
+#profilePic {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
 button {
   width: 99%;
   height: 28px;

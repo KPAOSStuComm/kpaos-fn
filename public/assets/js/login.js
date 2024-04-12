@@ -75,3 +75,7 @@ async function checkAuthenticationAndRedirect() {
 
 // Call the async function
 checkAuthenticationAndRedirect();
+
+function register() {
+  location.href = "./register";
+}

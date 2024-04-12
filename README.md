@@ -1,8 +1,8 @@
-<h1 align="center" id="title">KPAOS URL Shortener</h1>
+<h1 align="center" id="title">KPAOS Functions</h1>
 
 ## 🚀 Website
 
-[https://kpaos-shorturl.netlify.app](https://kpaos-shorturl.netlify.app/)
+[https://kpaos-fn.netlify.app](https://kpaos-fn.netlify.app)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d78542ff-bdf5-4559-82d5-55b0a17f4bda/deploy-status)](https://app.netlify.com/sites/kpaos-infosys/deploys)
 
@@ -16,9 +16,10 @@ Technologies used in the project:
 - [HTML](https://html.spec.whatwg.org/multipage/)
 - [CSS](https://www.w3.org/TR/CSS)
 - [JS](https://en.wikipedia.org/wiki/JavaScript)
-- [Node JS](https://nodejs.org)
+- [Node.js](https://nodejs.org)
 - [Netlify](https://netlify.com)
 - [Supabase](https://supabase.com)
+- [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 
 ## 🛡️ License
 

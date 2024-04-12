@@ -1,0 +1,81 @@
+/* * Setup */
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255) 5%,
+    rgb(97, 231, 255) 100%
+  );
+}
+
+#reg-container {
+  background: snow;
+  display: flex;
+  flex-direction: column;
+  padding: 2vw 4vw;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10mm;
+}
+
+/* * Login form */
+form {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 28px;
+  text-align: center;
+}
+
+label {
+  font-family: "Mali", cursive;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+input {
+  width: 99%;
+  height: 2.5em;
+  margin-top: 1mm;
+}
+
+#profilePic {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+button {
+  width: 99%;
+  height: 28px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+p {
+  color: #24292f;
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+@media (max-width: 1088px) {
+  input {
+    margin-bottom: 5px;
+  }
+}
